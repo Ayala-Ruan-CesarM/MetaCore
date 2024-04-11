@@ -3,7 +3,11 @@ MetaCore: Unique core sequences from metagenomics samples for microbiome wide as
 
 Both MetaCore.sh and remove_redundant_Cords.ST.py had to be in working folder
 
-USAGE:  MetaCore.sh  -i <list>  -o <basename>  [options]
+Positive.list : text file with the name of every positive metagenome to analyze (one name per line)
+Negative.list : text file with the name of every negative metagenome to analyze (one name per line)
+
+
+USAGE:  MetaCore.sh  -i Positive.list -n Negative.list -o <basename>  [options]
 
  OPTIONS:
 
