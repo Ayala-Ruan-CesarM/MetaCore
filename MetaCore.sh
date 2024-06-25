@@ -57,6 +57,9 @@ done
 if [ "$INPUT_LIST" == "N.O_L.I.S.T" ]; then echo "genome directory is not specified (option -i)"       >&2 ; exit 1 ; fi
 if [ "$INPUT_NEG_LIST" == "N.O_L.I.S.T" ]; then echo "Negative metagenome list is not specified (option -n)"       >&2 ; exit 1 ; fi
 if [ "$OUTPUT_FILE" == "N.O_O.U.T" ];  then echo "basename is not specified (option -o)"               >&2 ; exit 1 ; fi
+
+# The menu is copied and modified to my needs from original Criscuolo A (2020), JolyTree bash script 
+# available at https://gitlab.pasteur.fr/GIPhy/JolyTree
 # Inicia variable que almacena la lista de metagenomas positivos
 metagenome_list=($(cat $INPUT_LIST))
 # 
@@ -96,6 +99,8 @@ for ((i=0; i<${#metagenome_list[@]}; i++)); do
       echo "este archivo pesa más de 2.6G. Dividiendo el archivo "
       out=tmp_split
       folder=tmpsplit
+      # This seqkit split2 line requires extensive testing as is the solution to RAM constraints
+      # Maybe make it as a funcion of an user input RAM parameter. To Be implemented 25/06/24
       seqkit split2 -p 2 "$first_metagenome" -O "$folder" -o "$out"
       mashmap -r "$folder/$out.part_001.fasta" -q "$second_metagenome" -s "$SEG_LENGTH" -t "$NPROC" -k "$KMER" -o part1.split --pi "$PERCENT_IDENT"
       mashmap -r "$folder/$out.part_002.fasta" -q "$second_metagenome" -s "$SEG_LENGTH" -t "$NPROC" -k "$KMER" -o part2.split --pi "$PERCENT_IDENT"
