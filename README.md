@@ -22,3 +22,6 @@ USAGE:  MetaCore.sh  -i Positive.list -n Negative.list -o <basename>  [options]
     -f  <string>    Results folder name (Default: Results)
 
 
+# Contact Information
+
+Feel free to open an issue post or via mail to cesar.ayala@ibt.unam.mx 
