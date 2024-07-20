@@ -101,6 +101,8 @@ for ((i=0; i<${#metagenome_list[@]}; i++)); do
       folder=tmpsplit
       # This seqkit split2 line requires extensive testing as is the solution to RAM constraints
       # Maybe make it as a funcion of an user input RAM parameter. To Be implemented 25/06/24
+      # RAM usage should be capped to the user capacity not let it go til infinite... To do so:
+      # Get the size of the reference and then generate the split according to the limitation of User RAM 19/07/24
       seqkit split2 -p 2 "$first_metagenome" -O "$folder" -o "$out"
       mashmap -r "$folder/$out.part_001.fasta" -q "$second_metagenome" -s "$SEG_LENGTH" -t "$NPROC" -k "$KMER" -o part1.split --pi "$PERCENT_IDENT"
       mashmap -r "$folder/$out.part_002.fasta" -q "$second_metagenome" -s "$SEG_LENGTH" -t "$NPROC" -k "$KMER" -o part2.split --pi "$PERCENT_IDENT"
